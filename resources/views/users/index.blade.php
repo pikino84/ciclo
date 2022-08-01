@@ -16,41 +16,63 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 mx-auto">
-                    <table class="table">
-                        <th>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>&nbsp;</th>
-                            </tr>
-                        </th>
-                        <tbody>
-                            @foreach ($users as $user )
-                                <tr>
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>
-                                        {{-- Todo valor amodificar va dentro de un formulario--}}
-                                        {{--Usamos el helper route--}}
-                                        <form action="{{ route('users.destroy', $user) }}" method="POST">
-                                            {{--Usamos el helper method@  --}}
-                                            @method('DELETE')
-                                            {{--Helper que le indica a laravel que es un form nuestro mediante un token--}}
-                                            @csrf
-                                            <input  
-                                                type="submit" 
-                                                value="Eliminar" 
-                                                class="btn btn-danger btn-sm" 
-                                                onclick="return confirm('¿Desea eliminar...?')">
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="card border-0 shadow">
+                        <div class="card-body">
+                            <form action="{{ route('users.store') }}" method="POST">
+                                <div class="form-row">
+                                    <div class="col-sm-3">
+                                        <input type="text" name="name" class="form-control" placeholder="Nombre">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="email" name="email" class="form-control" placeholder="Correo">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <input type="password" name="password" class="form-control" placeholder="Contraseña">
+                                    </div>
+                                    <div class="col-auto">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                    </div>
                 </div>
+                <table class="table">
+                    <th>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </th>
+                    <tbody>
+                        @foreach ($users as $user )
+                            <tr>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    {{-- Todo valor amodificar va dentro de un formulario--}}
+                                    {{--Usamos el helper route--}}
+                                    <form action="{{ route('users.destroy', $user) }}" method="POST">
+                                        {{--Usamos el helper method@  --}}
+                                        @method('DELETE')
+                                        {{--Helper que le indica a laravel que es un form nuestro mediante un token--}}
+                                        @csrf
+                                        <input  
+                                            type="submit" 
+                                            value="Eliminar" 
+                                            class="btn btn-danger btn-sm" 
+                                            onclick="return confirm('¿Desea eliminar...?')">
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>
