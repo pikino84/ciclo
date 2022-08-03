@@ -21,10 +21,10 @@
                             <form action="{{ route('users.store') }}" method="POST">
                                 <div class="form-row">
                                     <div class="col-sm-3">
-                                        <input type="text" name="name" class="form-control" placeholder="Nombre">
+                                        <input type="text" name="name" class="form-control" placeholder="Nombre" value="{{ old('name') }}">
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="email" name="email" class="form-control" placeholder="Correo">
+                                        <input type="email" name="email" class="form-control" placeholder="Correo" value="{{ old('email')}}">
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="password" name="password" class="form-control" placeholder="Contraseña">
@@ -35,8 +35,14 @@
                                     </div>
                                 </div>
                             </form>
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                @foreach ($errors->all() as $error )
+                                  - {{ $error }} <br>  
+                                @endforeach
+                            </div>
+                            @endif
                         </div>
-                        
                     </div>
                 </div>
                 <table class="table">
